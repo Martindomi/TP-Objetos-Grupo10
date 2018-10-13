@@ -1,8 +1,8 @@
-import TPobjetos.*
+import hechiceros.*
 import hechizos.*
 import artefactos.*
 
-describe "test parte 3"{
+describe "test PUNTO 3"{
 
 	/*rolando.agregarArtefacto(armadura)
 	rolando.agregarArtefacto(espejoFantastico)
@@ -56,7 +56,7 @@ describe "test parte 3"{
 		rolando.agregarArtefacto(espejoFantastico)
 		
 		armadura.refuerzo(hechizo)
-		hechizo.elHechizo(hechizoBasico)
+		hechizo.hechizoNuevo(hechizoBasico)
 		assert.equals(12,armadura.poderDeLucha(rolando))
 		
 	}
@@ -67,7 +67,7 @@ describe "test parte 3"{
 		rolando.agregarArtefacto(espejoFantastico)
 		
 		armadura.refuerzo(hechizo)
-		hechizo.elHechizo(espectroMalefico)
+		hechizo.hechizoNuevo(espectroMalefico)
 		assert.equals(19,armadura.poderDeLucha(rolando))
 	}
 	
@@ -81,7 +81,7 @@ describe "test parte 3"{
 		assert.equals(1,rolando.habilidadDeLucha())
 	}
 	
-	test "Reemplazar al hechizo preferido por un libro de hechizos que contenga el espectro maléfico (con nombre “espectro maléfico”) y al hechizo básico.
+	test "Reemplazar al hechizo preferido por un libro de hechizos que contenga el Hechizo de Logos (con nombre “espectro maléfico”) y al hechizo básico.
 		  Saber cuál es el nivel de hechicería de Rolando"{
 		  
 		rolando.agregarArtefacto(armadura)
@@ -95,4 +95,13 @@ describe "test parte 3"{
 		
 		  	
 	}
+	
+	test "Agregarle a Rolando una armadura extra, cuyo valor base es 5, con un refuerzo cota de malla que tiene un valor de lucha 6.
+		  Saber cuál es la habilidad para la lucha de Rolando."{
+		  rolando.agregarArtefacto(armadura)
+		  rolando.agregarArtefacto(espejoFantastico)	
+		  rolando.agregarArtefacto(armaduraExtra)
+		  
+		  assert.equals(37,rolando.habilidadDeLucha())
+		  }
 }

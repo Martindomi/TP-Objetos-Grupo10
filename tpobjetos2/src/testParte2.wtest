@@ -1,9 +1,8 @@
-import TPobjetos.*
+import hechiceros.*
 import artefactos.*
 import hechizos.*
 
-
-/*TEST PUNTO 2 */
+describe "Test PUNTO 2" {
 
 test "Eliminar todos los artefactos de Rolando. Conocer la habilidad para la lucha de Rolando"
 
@@ -54,4 +53,23 @@ Conocer la habilidad para la lucha de Rolando."
  	rolando.quitarArtefacto(mascaraOscura)
 	assert.equals(9, rolando.habilidadDeLucha())
 
+}
+
+test "Tener una máscara (para nada) oscura con índice de oscuridad = 0.
+Preguntar por el valor de lucha de la máscara oscura de Rolando."
+
+{
+	
+	assert.equals(4,mascaraPocoOscura.poderDeLucha(rolando))
+	
+}
+
+test "Tener una máscara (para nada) oscura con índice de oscuridad = 0, y valor mínimo en 2. 
+Preguntar por el valor de lucha de la máscara oscura de Rolando."
+
+{
+	
+	mascaraPocoOscura.cambiarMinimo(2)
+	assert.equals(2,mascaraPocoOscura.poderDeLucha(rolando))
+}
 }

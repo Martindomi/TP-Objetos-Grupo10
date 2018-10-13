@@ -1,20 +1,37 @@
-import TPobjetos.*
+import hechiceros.*
 import hechizos.*
 
 class ArmaBlanca {
 	
-	method poderDeLucha(hechicero) {
+	method esEspejo(){
+		return false
+	}
+	method unidadesDeLucha() {
 		return 3
+	}
+	method poderDeLucha(hechicero) {
+		return self.unidadesDeLucha()
+	}
+	
+	method costo() {
+		return 5*self.unidadesDeLucha()
 	}
 }
 /*PUNTO 2 */
-var espadaDelDestino = new ArmaBlanca () /* ESTE OBJETO DEBE PERTENECER A LA CLASE ARMABLANCA */
+
+
 	
 
 
-object collarDivino {
+class CollarDivino {
 
-	var perlas = 5
+	var perlas
+	
+	constructor(cuantasPerlas){perlas=cuantasPerlas}
+	
+	method esEspejo(){
+		return false
+	}
 	
 	method perlas(){
 		return perlas
@@ -27,7 +44,13 @@ object collarDivino {
 	method poderDeLucha(hechicero) {
 		return self.perlas()
 	}
+	
+	method costo() {
+		return 2*perlas
+	}
 }
+
+
 
 class MascaraOscura {
 	
@@ -40,89 +63,187 @@ class MascaraOscura {
 		}
 		indiceOscuridad = unValor
 	}
-	method poderDeLucha(hechiero) {
-		return minimo.max((fuerzaOscura.valor()/2) * indiceOscuridad)
+	method esEspejo(){
+		return false
+	}
+	
+	method unidadesDeLucha() {
+		return ((fuerzaOscura.valor()/2) * indiceOscuridad)
+	}
+	method poderDeLucha(hechicero) {
+		return minimo.max(self.unidadesDeLucha())
 	}
 	method cambiarMinimo(nuevoMinimo){
 		minimo = nuevoMinimo
 	}
+	
+	method costo(hechicero) {
+		return 5*self.unidadesDeLucha()
+	}
 }
 	
 	
-var mascaraOscuraRolando = new MascaraOscura(1)  /* hay que hacer que este objeto pertenzca a la clase MascaraOscura */
 
 
 /*PUNTO 3 */
-object armadura {
+class Armadura {
 	
-	var refuerzo = ninguno
+	var valorBase
+	var refuerzo 
 	
-	method poderDeLucha(hechicero) {
-		return 2 + refuerzo.valorRefuerzo(hechicero)
+	
+	constructor(unValor,unRefuerzo){
+		valorBase = unValor
+		refuerzo = unRefuerzo
 	}
 	
+	method esEspejo(){
+		return false
+	}
+	method poderDeLucha(hechicero) {
+		if(refuerzo == null){
+			return 2
+		}
+		else
+		{
+			return valorBase + refuerzo.valorRefuerzo(hechicero)
+	    }
+	}
+/* no se nos ocurre otra forma */
+	  method costo(){
+	  	if(refuerzo == null){
+			return 2
+		}
+		else
+		{
+			if(refuerzo.cota()){
+				return refuerzo.precio()
+	    	}
+	    	else
+	    	{
+	    		return valorBase + refuerzo.precio()
+	    	}
+	  	}
+
+	}
 	
 	method refuerzo(nuevoRefuerzo){
 		refuerzo = nuevoRefuerzo
 	}
 }
 
-object cotaDeMalla {
+class CotaDeMalla {
+	
+	var valor
+	
+	constructor(unValor){valor = unValor}
+	
+	method cota(){return true}
 				 
 	method valorRefuerzo(hechicero){
-		return 1
+		return valor
 	} 
+	
+	method precio(){
+		return valor/2
+	}
 }
 
-object bendicion {
+class Bendicion {
+		
+		method cota(){return false}
 				
 		method valorRefuerzo(hechicero){
 			return hechicero.nivelDeHechiceria()
 		}
+		
+		
+		method precio(){
+		return 0
+	}
+		
 }
 
-object hechizo {
-		var elHechizo = hechizoBasico
+class Hechizo {
+	
+		var elHechizo 
 		
-		method elHechizo(unHechizo){
+		constructor(unHechizo){
 			elHechizo = unHechizo
+		}
+		
+		method cota(){return false}
+		
+		method hechizoNuevo(nuevoHechizo){
+			elHechizo = nuevoHechizo
 		}
 		method valorRefuerzo(hechicero){
 			return elHechizo.poder()
 		}
+		method precio(){
+		return elHechizo.costo()
+	}
 }
 
-object ninguno{
-				
-		method valorRefuerzo(hechicero){
-			return 0
+
+
+
+class EspejoFantastico {
+	
+	method esEspejo(){
+		return true
 	}
-} 
-
-
-
-object espejoFantastico {
-	var puntos = 0
 		
 	method puntosEspejo(hechicero) {
 		if(hechicero.poseeArtefacto(self) and hechicero.cantidadArtefactos() >1)
 		{
-			puntos = hechicero.poderMasPoderoso()
+			return hechicero.poderMasPoderoso()
 		}
 		else{
-		puntos = 0
+		    return 0
 		}
 		
 	}
 		
-
-	method puntos(hechicero){
-		self.puntosEspejo(hechicero)
-		return puntos
-	}
 
 	method poderDeLucha(hechicero) {
 	
-		return self.puntos(hechicero)
+		return self.puntosEspejo(hechicero)
+	}
+	
+	method costo() {
+		return 90
 	}
 }
+
+/*artefactos para Loki */
+object espejoFantastico inherits EspejoFantastico {}
+
+/*artefactos para rolando */
+
+/*artefactos para thor */
+object bendicion inherits Bendicion {}
+object armaduraConBendicion inherits Armadura(2, bendicion) {}
+object armaduraConAlacachula inherits Armadura(2, unHechizo) {}
+
+
+
+/*artefactos para xenia */
+object espadaDelDestino inherits ArmaBlanca {}
+object armadura inherits Armadura (2,null) {}
+object armaduraExtra inherits Armadura (5,cotaNueva) {}
+object cotaNueva inherits CotaDeMalla (5) {}
+object collarDivino inherits CollarDivino(5) {}
+
+
+object unHechizo inherits Hechizo(alacachula)
+
+object mascaraOscura inherits MascaraOscura(1) {}
+object mascaraPocoOscura inherits MascaraOscura(0) {}
+object cotaDeMalla inherits CotaDeMalla (1) {}
+object hechizo inherits Hechizo (hechizoBasico) {}
+object espada inherits ArmaBlanca {}
+object otraArmadura inherits Armadura(2,cota3) {}
+object cota3 inherits CotaDeMalla(5){}
+
+

@@ -1,7 +1,7 @@
-import TPobjetos.*
+import hechiceros.*
 
 
-class Logos {
+class Logo {
 	
 	var nombre
 	var multiplo
@@ -31,50 +31,36 @@ class Logos {
 		return self.poder() > 15
 	}
 	
+	method costo(){
+		return self.poder()
+	}
+	
 }
 /*PRIMER HECHIZO*/
-object espectroMalefico { /* ESTE OBJETO DEBE PERTENECER A LA CLASE LOGOS */
-
-	var nombre = "espectro Malefico"
-
-	method cambiarNombre(nuevoNombre) { 
-		nombre = nuevoNombre
-	}
-
-	method nombre() {
-		return nombre
-	}
-
-	method poder() {
-		return nombre.length()
-	}
-
-	method esPoderoso() {
-		return self.poder() > 15
-	}
-
+object espectroMalefico inherits Logo ("espectro Malefico",1) {
+	
 }
+
+
 
 /*SEGUNDO HECHIZO*/
-object hechizoBasico {
-
-	var nombre ="hechizo basico"
+object hechizoBasico inherits Logo("hechizo basico",null){
 	
-	method nombre() {
-		return nombre
-		
-	}
-	
-	method poder() {
+	override method poder() {
 		return 10
 	}
-
-	method esPoderoso() {
-		return false
+	override method cambiarNombre(nombreNuevo){
+		nombre = "hechizo basico"
 	}
+	
+	
+
+
 }
-object libroDeHechizos {
-	var hechizosDelLibro = []
+class LibroDeHechizos {
+	var hechizosDelLibro
+	
+	constructor (unosHechizos){hechizosDelLibro = unosHechizos}
 
 	method agregarHechizo(hechizo) {
 		hechizosDelLibro.add(hechizo) 
@@ -91,6 +77,20 @@ object libroDeHechizos {
 	method esPoderoso() {
 		return self.poder() > 15
 	}
+	
+	method precioPorCantidadDeLibros(){
+		return 10*hechizosDelLibro.size()
+	}
+		
+	
+	method costo() {
+		return (self.precioPorCantidadDeLibros()+self.poder())
+	}
 }
 
+/*Al haber distintos libros de hechizos un libro de hechizos puede contener a otro diferente */
 
+object libroDeHechizos inherits LibroDeHechizos ([]) {}
+object libroDeHechizosConAlacachula inherits LibroDeHechizos ([alacachula, hechizoBasico]) {}
+
+object alacachula inherits Logo ("alacachula cachicomula",1) {}

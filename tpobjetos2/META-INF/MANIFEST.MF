@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: tpobjetos2
+Bundle-Name: TPObjetos2
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: tpobjetos2; singleton:=true
+Bundle-SymbolicName: TPObjetos2; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: com.ibm.icu,
  org.eclipse.xtext,
