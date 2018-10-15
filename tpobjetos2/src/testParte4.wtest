@@ -41,7 +41,7 @@ describe "test parte 4"{
      	xenia.comprarArtefacto(espadaDelDestino)
      	xenia.comprarArtefacto(collarDivino)
      	xenia.comprarArtefacto(armadura)
-     	xenia.comprarArtefacto(armaduraExtra)
+     	xenia.comprarArtefacto(otraArmadura)
      	assert.equals(70.5, xenia.oro())
      	
      }
@@ -52,7 +52,7 @@ describe "test parte 4"{
      	xenia.comprarArtefacto(espadaDelDestino)
      	xenia.comprarArtefacto(collarDivino)
      	xenia.comprarArtefacto(armadura)
-     	xenia.comprarArtefacto(armaduraExtra)
+     	xenia.comprarArtefacto(otraArmadura)
      	assert.equals(4, xenia.cantidadArtefactos())
      	
      }

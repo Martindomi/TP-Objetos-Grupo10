@@ -220,7 +220,8 @@ class EspejoFantastico {
 object espejoFantastico inherits EspejoFantastico {}
 
 /*artefactos para rolando */
-
+object armaduraExtra inherits Armadura (5,cotaNueva) {}
+object cotaNueva inherits CotaDeMalla (6) {}
 /*artefactos para thor */
 object bendicion inherits Bendicion {}
 object armaduraConBendicion inherits Armadura(2, bendicion) {}
@@ -231,19 +232,18 @@ object armaduraConAlacachula inherits Armadura(2, unHechizo) {}
 /*artefactos para xenia */
 object espadaDelDestino inherits ArmaBlanca {}
 object armadura inherits Armadura (2,null) {}
-object armaduraExtra inherits Armadura (5,cotaNueva) {}
-object cotaNueva inherits CotaDeMalla (5) {}
+object otraArmadura inherits Armadura(2,cota3) {}
+object cota3 inherits CotaDeMalla(5){}
 object collarDivino inherits CollarDivino(5) {}
 
 
-object unHechizo inherits Hechizo(alacachula)
+object unHechizo inherits Hechizo(alacachula) {}
 
 object mascaraOscura inherits MascaraOscura(1) {}
 object mascaraPocoOscura inherits MascaraOscura(0) {}
 object cotaDeMalla inherits CotaDeMalla (1) {}
 object hechizo inherits Hechizo (hechizoBasico) {}
 object espada inherits ArmaBlanca {}
-object otraArmadura inherits Armadura(2,cota3) {}
-object cota3 inherits CotaDeMalla(5){}
+
 
 
