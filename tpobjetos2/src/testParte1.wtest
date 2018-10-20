@@ -3,6 +3,11 @@ import hechizos.*
 import artefactos.*
 
 describe "Test PUNTO 1" {
+	const collarDivino = new CollarDivino(5)
+	const mascaraOscura = new MascaraOscura(1)
+	const espadaDelDestino = new ArmaBlanca()
+	const rolando = new Hechicero (espectroMalefico,[espadaDelDestino , collarDivino , mascaraOscura], 100)
+
 	
 	test "Conocer el nivel de hechiceria de Rolando" {
 	

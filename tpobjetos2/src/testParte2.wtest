@@ -3,6 +3,11 @@ import artefactos.*
 import hechizos.*
 
 describe "Test PUNTO 2" {
+	const collarDivino = new CollarDivino(5)
+	const mascaraOscura = new MascaraOscura(1)
+	const espadaDelDestino = new ArmaBlanca()
+    const rolando = new Hechicero (espectroMalefico,[espadaDelDestino , collarDivino , mascaraOscura], 100)
+    const mascaraPocoOscura = new  MascaraOscura(0)
 
 test "Eliminar todos los artefactos de Rolando. Conocer la habilidad para la lucha de Rolando"
 

@@ -135,8 +135,4 @@ class Hechicero {
 	
 }
 
-object rolando inherits Hechicero(espectroMalefico,[espadaDelDestino , collarDivino , mascaraOscura], 100) {}
 
-object xenia inherits Hechicero(alacachula,[],100) {}
-object thor inherits Hechicero(hechizoBasico,[],100){}
-object loki inherits Hechicero(hechizoBasico,[],5) {}

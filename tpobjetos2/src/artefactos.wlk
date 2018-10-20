@@ -149,9 +149,10 @@ class CotaDeMalla {
 	}
 }
 
-class Bendicion {
+object bendicion {
 		
-		method cota(){return false}
+		method cota()
+			{return false}
 				
 		method valorRefuerzo(hechicero){
 			return hechicero.nivelDeHechiceria()
@@ -159,7 +160,7 @@ class Bendicion {
 		
 		
 		method precio(){
-		return 0
+			return 0
 	}
 		
 }
@@ -216,34 +217,7 @@ class EspejoFantastico {
 	}
 }
 
-/*artefactos para Loki */
-object espejoFantastico inherits EspejoFantastico {}
 
-/*artefactos para rolando */
-object armaduraExtra inherits Armadura (5,cotaNueva) {}
-object cotaNueva inherits CotaDeMalla (6) {}
-/*artefactos para thor */
-object bendicion inherits Bendicion {}
-object armaduraConBendicion inherits Armadura(2, bendicion) {}
-object armaduraConAlacachula inherits Armadura(2, unHechizo) {}
-
-
-
-/*artefactos para xenia */
-object espadaDelDestino inherits ArmaBlanca {}
-object armadura inherits Armadura (2,null) {}
-object otraArmadura inherits Armadura(2,cota3) {}
-object cota3 inherits CotaDeMalla(5){}
-object collarDivino inherits CollarDivino(5) {}
-
-
-object unHechizo inherits Hechizo(alacachula) {}
-
-object mascaraOscura inherits MascaraOscura(1) {}
-object mascaraPocoOscura inherits MascaraOscura(0) {}
-object cotaDeMalla inherits CotaDeMalla (1) {}
-object hechizo inherits Hechizo (hechizoBasico) {}
-object espada inherits ArmaBlanca {}
 
 
 

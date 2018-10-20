@@ -1,9 +1,26 @@
 import artefactos.*
 import hechizos.*
 import hechiceros.*
+
 describe "test parte 4"{
 	
+	const alacachula = new Logo ("alacachula cachicomula",1) 
+	const libroDeHechizosConAlacachula = new LibroDeHechizos ([alacachula, hechizoBasico])  
+	const espejoFantastico = new EspejoFantastico ()
+	const armaduraConBendicion = new Armadura(2, bendicion) 
+	const unHechizo = new Hechizo(alacachula)
+	const armaduraConAlacachula = new Armadura(2, unHechizo) 
+	const espadaDelDestino = new ArmaBlanca ()
+	const armadura = new Armadura (2,null) 
+	const cota3 = new CotaDeMalla(5)
+	const otraArmadura = new Armadura(2,cota3) 
+	const collarDivino = new CollarDivino(5) 
+    const xenia = new Hechicero(alacachula,[],100)
+   	const thor = new Hechicero(hechizoBasico,[],100)
+    const loki = new Hechicero(hechizoBasico,[],5)
+ 
     
+  
     test "Conocer el precio de lista de un hechizo 
     de logo cuyo nombre es “alacachula cachicomula" {
     	
@@ -25,8 +42,7 @@ describe "test parte 4"{
      }
      
      test "Hacer canjear dos veces a Thor el mismo hechizo básico." {
-     	thor.canjeHechizo(hechizoBasico)
-     	thor.canjeHechizo(hechizoBasico)
+     	2.times{n => thor.canjeHechizo(hechizoBasico)}
      	assert.equals(90, thor.oro())
      }
      

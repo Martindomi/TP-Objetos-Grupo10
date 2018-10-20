@@ -90,7 +90,3 @@ class LibroDeHechizos {
 
 /*Al haber distintos libros de hechizos un libro de hechizos puede contener a otro diferente */
 
-object libroDeHechizos inherits LibroDeHechizos ([]) {}
-object libroDeHechizosConAlacachula inherits LibroDeHechizos ([alacachula, hechizoBasico]) {}
-
-object alacachula inherits Logo ("alacachula cachicomula",1) {}
