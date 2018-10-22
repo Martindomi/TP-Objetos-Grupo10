@@ -44,15 +44,24 @@ object espectroMalefico inherits Logo ("espectro Malefico",1) {
 
 
 /*SEGUNDO HECHIZO*/
-object hechizoBasico inherits Logo("hechizo basico",null){
+object hechizoBasico {
 	
-	override method poder() {
+	var nombre = "hechizo basico"
+	
+	method poder() {
 		return 10
 	}
-	override method cambiarNombre(nombreNuevo){
+	method cambiarNombre(nombreNuevo){
 		nombre = "hechizo basico"
 	}
 	
+	method nombre() {
+		return nombre
+	}
+	
+	method esPoderoso() {
+		return false
+	}
 	
 
 

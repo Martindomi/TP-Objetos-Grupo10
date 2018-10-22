@@ -101,29 +101,11 @@ class Armadura {
 		return false
 	}
 	method poderDeLucha(hechicero) {
-		if(refuerzo == null){
-			return 2
-		}
-		else
-		{
 			return valorBase + refuerzo.valorRefuerzo(hechicero)
-	    }
 	}
 /* no se nos ocurre otra forma */
 	  method costo(){
-	  	if(refuerzo == null){
-			return 2
-		}
-		else
-		{
-			if(refuerzo.cota()){
-				return refuerzo.precio()
-	    	}
-	    	else
-	    	{
-	    		return valorBase + refuerzo.precio()
-	    	}
-	  	}
+	  	return refuerzo.precio(self)
 
 	}
 	
@@ -144,7 +126,7 @@ class CotaDeMalla {
 		return valor
 	} 
 	
-	method precio(){
+	method precio(armadura){
 		return valor/2
 	}
 }
@@ -159,8 +141,8 @@ object bendicion {
 		}
 		
 		
-		method precio(){
-			return 0
+		method precio(armadura){
+			return armadura.valorBase()
 	}
 		
 }
@@ -181,11 +163,23 @@ class Hechizo {
 		method valorRefuerzo(hechicero){
 			return elHechizo.poder()
 		}
-		method precio(){
-		return elHechizo.costo()
+		method precio(armadura){
+		return armadura.valorBase()+elHechizo.costo()
 	}
 }
 
+object ninguno {
+	
+	method cota(){return false}
+		
+		method valorRefuerzo(hechicero){return 0}
+		
+		method precio(armadura){
+			return 2
+	}
+	
+	
+}
 
 
 

@@ -22,7 +22,8 @@ class Hechicero {
 
 	var hechizoPreferido 
 	var artefactos 
-	var valorBase = 1
+	var valorBaseHabilidad = 1
+	var valorBase = 3
 	var oro
 	
 	constructor (unHechizo, unosArtefactos,cuantoOro){
@@ -42,27 +43,30 @@ class Hechicero {
 		return 0.max(hechizoNuevo.costo()-hechizoPreferido.costo()/2)
 		
 	}
-	method canjeHechizo(hechizoNuevo){
-		if(oro < self.diferenciaCanje(hechizoNuevo)){
+	
+	method restarDinero(valor) {
+		if (oro < valor){
 			self.error("no tienes suficiente oro para comprar este hechizo")
 		}
-		oro -= self.diferenciaCanje(hechizoNuevo)
+		oro -= valor
+		
+	}
+	
+	method canjeHechizo(hechizoNuevo){
+		self.restarDinero(self.diferenciaCanje(hechizoNuevo))
 		hechizoPreferido = hechizoNuevo
 	}
 	
 	method comprarArtefacto(unArtefacto){
-		if (oro < unArtefacto.costo()){
-			self.error("no tienes suficiente oro para comprar este artefacto")
-		}
-		oro -= unArtefacto.costo()
-		artefactos.add(unArtefacto)
+		self.restarDinero(unArtefacto.costo())
+		self.agregarArtefacto(unArtefacto)
 	}
 	method seCreePoderoso() {
 		return hechizoPreferido.esPoderoso()
 	}
 
 	method nivelDeHechiceria() {
-		return (3 * self.poderHechizoPreferido()) + fuerzaOscura.valor()
+		return (valorBase * self.poderHechizoPreferido()) + fuerzaOscura.valor()
 	}
 
 	method hechizoPreferido(hechizo) {
@@ -74,11 +78,15 @@ class Hechicero {
 	}
 
 	method habilidadDeLucha() {
-		return valorBase + artefactos.sum({unArtefacto => unArtefacto.poderDeLucha(self)})
+		return valorBaseHabilidad + artefactos.sum({unArtefacto => unArtefacto.poderDeLucha(self)})
 	}
 
 	method valorBase(unValor){
 		valorBase = unValor
+	}
+	
+	method valorBaseHabilidad(unValor){
+		valorBaseHabilidad = unValor
 	}
 
 	method agregarArtefacto(nuevoArtefacto) {
