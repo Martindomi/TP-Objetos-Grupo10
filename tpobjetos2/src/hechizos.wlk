@@ -63,6 +63,9 @@ object hechizoBasico {
 		return false
 	}
 	
+	method costo(){
+		return 10
+	}
 
 
 }

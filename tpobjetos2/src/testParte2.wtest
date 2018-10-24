@@ -37,7 +37,7 @@ test "Cambiar el valor base para la lucha de Rolando a 8.
 Conocer la habilidad para la lucha de Rolando con todos los artefactos."
 
  {
- 	rolando.valorBase(8)
+ 	rolando.valorBaseHabilidad(8)
 	assert.equals(20, rolando.habilidadDeLucha())
 
 }

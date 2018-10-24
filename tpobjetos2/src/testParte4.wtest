@@ -11,7 +11,7 @@ describe "test parte 4"{
 	const unHechizo = new Hechizo(alacachula)
 	const armaduraConAlacachula = new Armadura(2, unHechizo) 
 	const espadaDelDestino = new ArmaBlanca ()
-	const armadura = new Armadura (2,null) 
+	const armadura = new Armadura (2,ninguno) 
 	const cota3 = new CotaDeMalla(5)
 	const otraArmadura = new Armadura(2,cota3) 
 	const collarDivino = new CollarDivino(5) 
@@ -82,7 +82,7 @@ describe "test parte 4"{
      	assert.equals(74, thor.oro())
      }
      test "Loki quiere comprar el espejo"{
-     	assert.throwsExceptionWithMessage("no tienes suficiente oro para comprar este artefacto",
+     	assert.throwsExceptionWithMessage("no tienes suficiente oro para comprar este hechizo",
      	{loki.comprarArtefacto(espejoFantastico)}
      	)
      }

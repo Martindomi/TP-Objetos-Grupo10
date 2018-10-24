@@ -5,7 +5,7 @@ import artefactos.*
 describe "test PUNTO 3"{
 	const libroDeHechizos = new LibroDeHechizos ([])
 	const espejoFantastico = new EspejoFantastico ()
-	const armadura = new Armadura (2,null) 
+	const armadura = new Armadura (2,ninguno) 
 	const otraCota = new CotaDeMalla (6)
 	const armaduraExtra = new  Armadura (5,otraCota)  
 	const cotaDeMalla = new CotaDeMalla (1)

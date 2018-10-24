@@ -112,6 +112,10 @@ class Armadura {
 	method refuerzo(nuevoRefuerzo){
 		refuerzo = nuevoRefuerzo
 	}
+	
+	method valorBase(){
+		return valorBase
+	}
 }
 
 class CotaDeMalla {
