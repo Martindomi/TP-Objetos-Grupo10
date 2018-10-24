@@ -1,0 +1,80 @@
+import hechiceros.*
+import artefactos.*
+import hechizos.*
+
+describe "Test PUNTO 2" {
+	const collarDivino = new CollarDivino(5)
+	const mascaraOscura = new MascaraOscura(1)
+	const espadaDelDestino = new ArmaBlanca()
+    const rolando = new Hechicero (espectroMalefico,[espadaDelDestino , collarDivino , mascaraOscura], 100)
+    const mascaraPocoOscura = new  MascaraOscura(0)
+
+test "Eliminar todos los artefactos de Rolando. Conocer la habilidad para la lucha de Rolando"
+
+ {
+	rolando.eliminarArtefactos()
+	assert.equals(1, rolando.habilidadDeLucha())
+
+}
+
+test "Conocer la habilidad para la lucha de Rolando con todos los artefactos."
+
+ {
+	assert.equals(13, rolando.habilidadDeLucha())
+
+}
+
+test "Cambiar la cantidad de perlas del collar divino a 3.
+Conocer la habilidad para la lucha de Rolando con todos los artefactos."
+
+ {
+ 	collarDivino.cambiarCantidadDePerlas(3)
+	assert.equals(11, rolando.habilidadDeLucha())
+
+}
+
+test "Cambiar el valor base para la lucha de Rolando a 8.
+Conocer la habilidad para la lucha de Rolando con todos los artefactos."
+
+ {
+ 	rolando.valorBaseHabilidad(8)
+	assert.equals(20, rolando.habilidadDeLucha())
+
+}
+
+test "Hacer que ocurra un eclipse.
+Preguntar por el valor de lucha de la máscara oscura."
+
+ {
+ 	fuerzaOscura.eclipse()
+	assert.equals(5, mascaraOscura.poderDeLucha(rolando))
+
+}
+
+test "Eliminar la máscara oscura de los artefactos de Rolando.
+Conocer la habilidad para la lucha de Rolando."
+
+ {
+ 	rolando.quitarArtefacto(mascaraOscura)
+	assert.equals(9, rolando.habilidadDeLucha())
+
+}
+
+test "Tener una máscara (para nada) oscura con índice de oscuridad = 0.
+Preguntar por el valor de lucha de la máscara oscura de Rolando."
+
+{
+	
+	assert.equals(4,mascaraPocoOscura.poderDeLucha(rolando))
+	
+}
+
+test "Tener una máscara (para nada) oscura con índice de oscuridad = 0, y valor mínimo en 2. 
+Preguntar por el valor de lucha de la máscara oscura de Rolando."
+
+{
+	
+	mascaraPocoOscura.cambiarMinimo(2)
+	assert.equals(2,mascaraPocoOscura.poderDeLucha(rolando))
+}
+}
