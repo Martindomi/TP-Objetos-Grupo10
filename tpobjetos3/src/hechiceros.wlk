@@ -25,11 +25,27 @@ class Hechicero {
 	var valorBaseHabilidad = 1
 	var valorBase = 3
 	var oro
+	const cargaMaxima
 	
-	constructor (unHechizo, unosArtefactos,cuantoOro){
+	constructor (unHechizo, unosArtefactos,cuantoOro,carga){
 		hechizoPreferido = unHechizo
 		artefactos = unosArtefactos
 		oro = cuantoOro
+		cargaMaxima = carga
+	}
+	
+	method cuantoCarga(){
+		return artefactos.sum({artefacto => artefacto.pesoReal()})
+	}
+	
+	method puedeCargar(unArtefacto) {
+		if(unArtefacto.pesoReal()+ self.cuantoCarga() > cargaMaxima){
+			self.error("no puedes adquirir el artefacto porque supera la carga maxima del personaje")
+		}
+	}
+	
+	method alivianarCargar(unArtefacto){
+		self.quitarArtefacto(unArtefacto)
 	}
 	
 	method cumplirObjetivo(){
@@ -58,6 +74,7 @@ class Hechicero {
 	}
 	
 	method comprarArtefacto(unArtefacto){
+		self.puedeCargar(unArtefacto)
 		self.restarDinero(unArtefacto.costo())
 		self.agregarArtefacto(unArtefacto)
 	}

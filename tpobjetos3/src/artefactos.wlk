@@ -2,30 +2,54 @@ import hechiceros.*
 import hechizos.*
 
 
+
 class Peso{
-	var peso
-	var fechaCompra
 	
-	constructor(unPeso,unaFechaCompra){
+	const fechaCompra
+	const peso
+	
+	constructor(unPeso){
+		peso= unPeso
+		fechaCompra = new Date ()
+	}
+	constructor (unPeso, haceXDias) {
 		peso = unPeso
-		fechaCompra = unaFechaCompra
+		fechaCompra = (new Date()).minusDays(haceXDias)
+	}
+	constructor(unPeso,dia,mes,anio){
+		fechaCompra = new Date (dia,mes,anio)
+		peso = unPeso
 	}
 	
-	method calcularDias(){
+	method diasDeCompra(){
+		return (new Date() - fechaCompra)
 		
 	}
 	method factorDeCorreccion(){
-		return 1.max(diasFechaCompra /1000)
+		return 1.min(self.diasDeCompra() /1000)
 	}
 	
-	method calcularPeso(){
+	method pesoReal(){
 		return peso - self.factorDeCorreccion()
 	}
-	
+
+
 }
 
-class ArmaBlanca {
 
+
+
+class ArmaBlanca inherits Peso{
+	
+	constructor(unPeso) = 
+		super(unPeso)
+		
+	constructor(unPeso,diasDesdeCompra) = 
+		super(unPeso,diasDesdeCompra)
+		
+	constructor(unPeso,diaCompra,mesCompra,anioCompra) = 
+		super(unPeso,diaCompra,mesCompra,anioCompra)
+	
 	method esEspejo(){
 		return false
 	}
@@ -46,12 +70,26 @@ class ArmaBlanca {
 	
 
 
-class CollarDivino {
-
+class CollarDivino inherits Peso {
 	var perlas
 	
-	constructor(cuantasPerlas){perlas=cuantasPerlas}
+	constructor(unPeso,unasPerlas) = 
+		super(unPeso){perlas=unasPerlas}
+		
+	constructor(unPeso,diasDesdeCompra,unasPerlas) = 
+		super(unPeso,diasDesdeCompra){perlas=unasPerlas}
+		
+	constructor(unPeso,diaCompra,mesCompra,anioCompra,unasPerlas) = 
+		super(unPeso,diaCompra,mesCompra,anioCompra){perlas=unasPerlas}
 	
+	method pesoExtra(){
+		return 0.5*perlas
+	}
+	
+	override method pesoReal(){
+		return self.pesoExtra() + super()
+	}
+
 	method esEspejo(){
 		return false
 	}
@@ -75,17 +113,34 @@ class CollarDivino {
 
 
 
-class MascaraOscura {
+class MascaraOscura inherits Peso{
 	
 	var indiceOscuridad
 	var minimo = 4
+	constructor(unPeso,unValor) = 
+		super(unPeso){self.ponerValor(unValor)}
+		
+	constructor(unPeso,diasDesdeCompra,unValor) = 
+		super(unPeso,diasDesdeCompra){self.ponerValor(unValor)}
+		
+	constructor(unPeso,diaCompra,mesCompra,anioCompra,unValor) = 
+		super(unPeso,diaCompra,mesCompra,anioCompra) {self.ponerValor(unValor)}
 	
-	constructor (unValor) {
+	method ponerValor(unValor){
 		if(unValor < 0 or unValor > 1){
 			self.error("El indice de oscuridad debe ser un valor entre 0 y 1")
 		}
 		indiceOscuridad = unValor
+		}
+	
+	method pesoExtra(){
+		return 0.max((self.unidadesDeLucha() - 3).roundUp())
 	}
+	
+	override method pesoReal(){
+		return self.pesoExtra() + super()
+	}
+	
 	method esEspejo(){
 		return false
 	}
@@ -109,24 +164,43 @@ class MascaraOscura {
 
 
 /*PUNTO 3 */
-class Armadura {
+class Armadura inherits Peso {
 	
 	var valorBase
 	var refuerzo 
 	
-	
-	constructor(unValor,unRefuerzo){
+	constructor(unPeso,unValor,unRefuerzo) = 
+		super(unPeso) {
+		valorBase = unValor
+		refuerzo = unRefuerzo
+	}
+		
+	constructor(unPeso,diasDesdeCompra,unValor,unRefuerzo) = 
+		super(unPeso,diasDesdeCompra) {
+		valorBase = unValor
+		refuerzo = unRefuerzo
+	}
+		
+	constructor(unPeso,diaCompra,mesCompra,anioCompra,unValor,unRefuerzo) = 
+		super(unPeso,diaCompra,mesCompra,anioCompra) {
 		valorBase = unValor
 		refuerzo = unRefuerzo
 	}
 	
+	method pesoExtra(){
+		return refuerzo.pesoExtra()
+	}
+	
+	override method pesoReal(){
+		return self.pesoExtra() + super()
+	}
 	method esEspejo(){
 		return false
 	}
 	method poderDeLucha(hechicero) {
 			return valorBase + refuerzo.valorRefuerzo(hechicero)
 	}
-/* no se nos ocurre otra forma */
+
 	  method costo(){
 	  	return refuerzo.precio(self)
 
@@ -146,9 +220,10 @@ class CotaDeMalla {
 	var valor
 	
 	constructor(unValor){valor = unValor}
-	
-	method cota(){return true}
-				 
+
+    method pesoExtra(){return 1}
+    
+   
 	method valorRefuerzo(hechicero){
 		return valor
 	} 
@@ -159,13 +234,13 @@ class CotaDeMalla {
 }
 
 object bendicion {
-		
-		method cota()
-			{return false}
+	
 				
 		method valorRefuerzo(hechicero){
 			return hechicero.nivelDeHechiceria()
 		}
+		
+		method pesoExtra(){return 0}
 		
 		
 		method precio(armadura){
@@ -182,7 +257,14 @@ class Hechizo {
 			elHechizo = unHechizo
 		}
 		
-		method cota(){return false}
+		method pesoExtra(){
+			if((elHechizo.poder()).odd()){
+				return 1
+			}else{
+				return 2
+			}	
+		
+		}
 		
 		method hechizoNuevo(nuevoHechizo){
 			elHechizo = nuevoHechizo
@@ -196,11 +278,12 @@ class Hechizo {
 }
 
 object ninguno {
-	
-	method cota(){return false}
 		
 		method valorRefuerzo(hechicero){return 0}
 		
+		method pesoExtra(){return 0}
+	
+	
 		method precio(armadura){
 			return 2
 	}
@@ -210,12 +293,21 @@ object ninguno {
 
 
 
-class EspejoFantastico {
+class EspejoFantastico inherits Peso{
 	
+	constructor(unPeso) = 
+		super(unPeso)
+		
+	constructor(unPeso,diasDesdeCompra) = 
+		super(unPeso,diasDesdeCompra)
+		
+	constructor(unPeso,diaCompra,mesCompra,anioCompra) = 
+		super(unPeso,diaCompra,mesCompra,anioCompra) 
+		
 	method esEspejo(){
 		return true
 	}
-		
+	
 	method puntosEspejo(hechicero) {
 		if(hechicero.poseeArtefacto(self) and hechicero.cantidadArtefactos() >1)
 		{
