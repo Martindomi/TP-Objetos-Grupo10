@@ -124,7 +124,6 @@ class CotaDeMalla {
 	
 	constructor(unValor){valor = unValor}
 	
-	method cota(){return true}
 				 
 	method valorRefuerzo(hechicero){
 		return valor
@@ -137,8 +136,6 @@ class CotaDeMalla {
 
 object bendicion {
 		
-		method cota()
-			{return false}
 				
 		method valorRefuerzo(hechicero){
 			return hechicero.nivelDeHechiceria()
@@ -159,7 +156,6 @@ class Hechizo {
 			elHechizo = unHechizo
 		}
 		
-		method cota(){return false}
 		
 		method hechizoNuevo(nuevoHechizo){
 			elHechizo = nuevoHechizo
@@ -174,7 +170,6 @@ class Hechizo {
 
 object ninguno {
 	
-	method cota(){return false}
 		
 		method valorRefuerzo(hechicero){return 0}
 		
