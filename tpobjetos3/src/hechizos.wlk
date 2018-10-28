@@ -64,7 +64,7 @@ object hechizoBasico {
 	}
 	
 	method costo(){
-		return 10
+		return self.poder()
 	}
 
 

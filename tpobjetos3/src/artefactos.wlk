@@ -61,7 +61,7 @@ class ArmaBlanca inherits Peso{
 	}
 	
 	method costo() {
-		return 5*self.unidadesDeLucha()
+		return 5*self.pesoReal()
 	}
 }
 /*PUNTO 2 */
@@ -155,8 +155,8 @@ class MascaraOscura inherits Peso{
 		minimo = nuevoMinimo
 	}
 	
-	method costo(hechicero) {
-		return 5*self.unidadesDeLucha()
+	method costo() {
+		return 10*indiceOscuridad
 	}
 }
 	

@@ -1,6 +1,6 @@
 import artefactos.*
 import hechizos.*
-
+import comerciantes.*
 
 object fuerzaOscura {
 	
@@ -73,9 +73,10 @@ class Hechicero {
 		hechizoPreferido = hechizoNuevo
 	}
 	
-	method comprarArtefacto(unArtefacto){
+	method comprarArtefacto(unArtefacto,unComerciante){
 		self.puedeCargar(unArtefacto)
-		self.restarDinero(unArtefacto.costo())
+		unComerciante.vender(unArtefacto)
+		self.restarDinero(unComerciante.calcularPrecio(unArtefacto))
 		self.agregarArtefacto(unArtefacto)
 	}
 	method seCreePoderoso() {
@@ -155,9 +156,41 @@ class Hechicero {
 		return (self.artefactoMasPoderoso()).poderDeLucha(self)
 	}
 
-	
-	
-	
+		
 }
 
 
+class TipoNivel {
+	
+		var valor
+
+		constructor(unValor) {
+			valor = unValor
+		}
+			
+		method dificultad() {
+			return valor
+		}
+	
+}
+
+object facil inherits TipoNivel(1){}
+object moderado inherits TipoNivel(2){}
+object dificil inherits TipoNivel(4){}
+
+class Npc inherits Hechicero{
+	
+	
+	var nivel
+	
+	constructor (unHechizo, unosArtefactos,cuantoOro,carga,unNivel) = 
+		super(unHechizo, unosArtefactos,cuantoOro,carga){	
+		nivel = unNivel
+		}
+	
+	
+	override method habilidadDeLucha() {
+		return nivel.dificultad() *super()
+	}
+	
+}
