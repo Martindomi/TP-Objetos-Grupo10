@@ -31,7 +31,7 @@ describe "Test punto 2" {
 	}
 	
 	test "Saber el peso de la espada comun"{
-		assert.equals(4.5, espadaComun.pesoReal())
+		assert.equals(4.95, espadaComun.pesoReal()) /*en la consigna dice /100 en el test y /1000 en el punto*/
 	}
 	
 	test "Saber el peso de la mascara oscura" {
@@ -71,8 +71,8 @@ describe "Test punto 2" {
 	}
 	
 	test "Merlín le quiere comprar a Mock Hnos. la armadura con hechizo par."{
-		merlin.comprarArtefacto(armaduraHechizoPar, mock)
-		assert.notThat(merlin.comprarArtefacto(armaduraHechizoPar, mock))
+		
+		assert.throwsExceptionWithMessage("no puedes adquirir el artefacto porque supera la carga maxima del personaje",{merlin.comprarArtefacto(armaduraHechizoPar, mock)})
 	}
 	
 	test "Ursula carga con 14 kilos iniciales (11 de la
@@ -80,7 +80,8 @@ describe "Test punto 2" {
 	oscura). Decide desprenderse de la armadura con
 	cota de malla. Saber cuál es el peso total con el
 	que carga Ursula ahora."{
-		
+		ursula.quitarArtefacto(armadura)
+		assert.equals(3,ursula.cuantoCarga())
 	}
 	
 	

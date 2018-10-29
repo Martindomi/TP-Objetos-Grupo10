@@ -109,7 +109,7 @@ describe "Test de regresion 2" {
 	hechizo de logos de nombre “alacachula
 	cachicomula” y el hechizo básico. Cuántas monedas
 	le quedan a Xenia."{
-		xenia.canjeHechizo(libroDeHechizosConAlacachula)
+		xenia.comprarArtefacto(libroDeHechizosConAlacachula, mock)
 		assert.equals(58, xenia.oro())
 	}
 	

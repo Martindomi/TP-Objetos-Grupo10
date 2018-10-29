@@ -5,7 +5,6 @@ import hechiceros.*
 
 describe "Test PUNTO 1" {
 	
-	const espectroMalefico = new Logo("espectro malefico", 0)
 	const furibunda = new Hechicero(hechizoComercial, [], 100, 200)
 	
 	test "Saber el nivel de hechicería de Furibunda."{

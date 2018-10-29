@@ -112,7 +112,8 @@ class LibroDeHechizos {
 	method precioPorCantidadDeLibros(){
 		return 10*hechizosDelLibro.size()
 	}
-		
+	
+	method pesoReal(){ return 0}
 	
 	method costo() {
 		return (self.precioPorCantidadDeLibros()+self.poder())
