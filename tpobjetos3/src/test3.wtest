@@ -1,0 +1,33 @@
+import hechiceros.*
+import hechizos.*
+import artefactos.*
+
+describe "test PUNTO 3"{
+	
+	const navi = new Npc (hechizoBasico, [],100,200,facil)
+	const mascaraClara = new MascaraOscura (0,0)
+	const ashleyGraham = new Npc (hechizoBasico, [mascaraClara],100,200,moderado)
+	
+ 
+	fixture {
+		ashleyGraham.valorBaseHabilidad(5)
+	}
+
+
+test "Conocer la habilidad para la lucha de navi " {
+	
+	assert.equals(1,navi.habilidadDeLucha())
+}
+
+test "Conocer la habilidad para la lucha de Ashley Graham." {
+	
+	assert.equals(18,ashleyGraham.habilidadDeLucha())
+}
+
+test "Hacer que Ashley Graham tenga dificultad difícil. 
+	  Conocer la habilidad para la lucha de Ashley Graham. "{
+			
+	ashleyGraham.cambiarNivel(dificil)
+	assert.equals(36,ashleyGraham.habilidadDeLucha())			
+}
+}

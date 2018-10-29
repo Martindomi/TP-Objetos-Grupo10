@@ -1,0 +1,55 @@
+import artefactos.*
+import hechizos.*
+import hechiceros.*
+import comerciantes.*
+
+describe "test parte 4"{
+	
+	const ursula = new Hechicero (hechizoBasico, [],100,200)
+	
+	const mascaraOscura = new MascaraOscura (1,1)
+	const indep = new Independiente (0.09)
+	const pastoriza = new Comerciante(indep,[mascaraOscura],0)
+	const prieto = new Comerciante(registrado,[mascaraOscura],0)
+	const fermepin = new Comerciante (conImpuestoGanancias,[mascaraOscura],0)
+   
+
+    test "Ursula comienza con 100 monedas. Luego compra la máscara oscura a Pastoriza. "{
+    	
+    	ursula.comprarArtefacto(mascaraOscura,pastoriza)
+    	assert.equals(89.1,ursula.oro())
+    }
+    
+    test "Ursula comienza con 100 monedas. Luego compra la máscara oscura a Prieto. "{
+    	
+    	ursula.comprarArtefacto(mascaraOscura,prieto)
+    	assert.equals(87.9,ursula.oro())
+    }
+    
+    test "Ursula comienza con 100 monedas. Luego compra la máscara oscura a Fermepin. "{
+    	
+    	ursula.comprarArtefacto(mascaraOscura,fermepin)
+    	assert.equals(88.25,ursula.oro())
+    }
+    
+    test "Recategorizar a Pastoriza. Hacer que Ursula le compre la máscara oscura a Pastoriza. "{
+    	
+    	pastoriza.recategorizacionCompulsiva()
+    	ursula.comprarArtefacto(mascaraOscura,pastoriza)
+    	assert.equals(88.2,ursula.oro())
+    }
+    
+    test "Recategorizar a Prieto. Hacer que Ursula le compre la máscara oscura a Prieto. "{
+    	
+    	prieto.recategorizacionCompulsiva()
+    	ursula.comprarArtefacto(mascaraOscura,prieto)
+    	assert.equals(88.25,ursula.oro())
+    }
+    
+    test "Recategorizar a Fermepin. Hacer que Ursula le compre la máscara oscura a Fermepin. "{
+    	
+    	fermepin.recategorizacionCompulsiva()
+    	ursula.comprarArtefacto(mascaraOscura,fermepin)
+    	assert.equals(88.25,ursula.oro())
+    }
+}

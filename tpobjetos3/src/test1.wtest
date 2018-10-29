@@ -1,0 +1,23 @@
+import comerciantes.*
+import artefactos.*
+import hechizos.*
+import hechiceros.*
+
+describe "Test PUNTO 1" {
+	
+	const espectroMalefico = new Logo("espectro malefico", 0)
+	const furibunda = new Hechicero(hechizoComercial, [], 100, 200)
+	
+	test "Saber el nivel de hechicería de Furibunda."{
+		assert.equals(29, furibunda.nivelDeHechiceria())
+		
+	}
+	
+	test "Saber si el hechizo comercial es poderoso"{
+		assert.notThat(hechizoComercial.esPoderoso())
+	}
+	
+	test "Saber si el espectro maléfico es poderoso"{
+		assert.that(espectroMalefico.esPoderoso())
+	}
+}

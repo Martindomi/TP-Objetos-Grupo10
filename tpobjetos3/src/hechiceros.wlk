@@ -193,4 +193,7 @@ class Npc inherits Hechicero{
 		return nivel.dificultad() *super()
 	}
 	
+	method cambiarNivel(otroNivel){
+		nivel = otroNivel
+	}
 }

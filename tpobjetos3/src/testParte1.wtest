@@ -2,7 +2,7 @@ import hechiceros.*
 import hechizos.*
 import artefactos.*
 
-describe "Test PUNTO 1" {
+describe "Test de regresion 1" {
 	
 	const libroDeHechizos = new LibroDeHechizos ([hechizoBasico])  
 	const collarDivino = new CollarDivino(null,5)

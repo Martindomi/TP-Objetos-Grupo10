@@ -1,0 +1,91 @@
+import hechiceros.*
+import hechizos.*
+import artefactos.*
+import comerciantes.*
+
+describe "Test punto 2" {
+	
+	const hechizoPar = new Hechizo (hechizoComercial)
+	const armaduraHechizoPar = new Armadura (12,2,hechizoPar)
+	const hechizoImpar = new Hechizo(espectroMalefico)
+	const armaduraHechizoImpar = new Armadura(12,2,hechizoImpar)
+	const espadaVieja = new ArmaBlanca(7, 7, 5, 2006)
+	const espadaNueva = new ArmaBlanca(4)
+	const espadaComun = new ArmaBlanca(5, 50)
+	const mascaraOscura = new MascaraOscura (3, 1)
+	const mascaraClara = new MascaraOscura(2, 0)
+	const cotaDeMalla = new CotaDeMalla(0)
+	const armadura = new Armadura(10, 2, cotaDeMalla)
+	const otraArmadura = new Armadura(12, 2, ninguno)
+	const independiente = new Independiente(0)
+	const mock = new Comerciante (independiente, [mascaraClara,mascaraOscura, armaduraHechizoPar],0)
+	const merlin = new Hechicero(null, [], 100, 10)
+	const ursula = new Hechicero(null, [mascaraOscura, armadura], 100, 20)
+	
+	test "Saber el peso de la espada vieja"{
+		assert.equals(6, espadaVieja.pesoReal())
+	}
+	
+	test "Saber el peso de la espada nueva"{
+		assert.equals(4, espadaNueva.pesoReal())
+	}
+	
+	test "Saber el peso de la espada comun"{
+		assert.equals(4.5, espadaComun.pesoReal())
+	}
+	
+	test "Saber el peso de la mascara oscura" {
+		assert.equals(3, mascaraOscura.pesoReal())
+	}
+	
+	test "Hacer que ocurra un eclipse.Saber el peso de la máscara oscura."{
+		fuerzaOscura.eclipse()
+		assert.equals(5, mascaraOscura.pesoReal())
+	}
+	
+	test "Saber el peso de la máscara clara."{
+		assert.equals(2, mascaraClara.pesoReal())
+	}
+	
+	test "Saber cuál es el peso total de la armadura con cota de malla."{
+		assert.equals(11, armadura.pesoReal())
+	}
+	
+	test "Saber cuál es el peso total de la armadura con hechizo par"{
+		assert.equals(14, armaduraHechizoPar.pesoReal())
+	}
+	
+	test "Saber cuál es el peso total de la armadura con hechizo impar"{
+		assert.equals(13, armaduraHechizoImpar.pesoReal())
+	}
+	
+	test "Saber cuál es el peso total de la armadura sin ningún tipo de refuerzo"{
+		assert.equals(12, otraArmadura.pesoReal())
+	}
+	
+	test "Merlín le compra a Mock Hnos. la máscara clara y la oscura (sin que haya eclipse). Saber cuál es el
+	peso total que carga Merlin."{
+		merlin.comprarArtefacto(mascaraClara, mock)
+		merlin.comprarArtefacto(mascaraOscura, mock)
+		assert.equals(5, merlin.cuantoCarga())
+	}
+	
+	test "Merlín le quiere comprar a Mock Hnos. la armadura con hechizo par."{
+		merlin.comprarArtefacto(armaduraHechizoPar, mock)
+		assert.notThat(merlin.comprarArtefacto(armaduraHechizoPar, mock))
+	}
+	
+	test "Ursula carga con 14 kilos iniciales (11 de la
+	armadura con cota de malla y 3 de la máscara
+	oscura). Decide desprenderse de la armadura con
+	cota de malla. Saber cuál es el peso total con el
+	que carga Ursula ahora."{
+		
+	}
+	
+	
+	
+	
+	
+	
+}

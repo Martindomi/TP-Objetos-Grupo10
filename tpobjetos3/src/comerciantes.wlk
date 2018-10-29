@@ -70,7 +70,7 @@ class Comerciante {
 		oro = cantOro
 	}
 	method tieneArtefacto(artefacto) {
-		if (artefactos.contains(artefacto)){
+		if (not(artefactos.contains(artefacto))){
 			self.error("comerciante no posee artefacto")
 		}	
 	}
