@@ -1,24 +1,19 @@
 import hechiceros.*
 
-
-class Logo {
+class Hechizo {
 	
 	var nombre
 	var multiplo
 	
-	constructor (unNombre, unMultiplo){
-		nombre = unNombre
-		multiplo = unMultiplo
+	constructor (_nombre,_multiplo) {
+		nombre = _nombre
+		multiplo = _multiplo
 	}
 	
-	method cambiarNombre(nuevoNombre) { 
-		nombre = nuevoNombre
-	}
-
-	method nombre() {
+		method nombre() {
 		return nombre
 	}
-
+	
 	method cantidadLetras() {
 		return nombre.length()
 	}
@@ -26,14 +21,29 @@ class Logo {
 	method poder() {
 		return multiplo*self.cantidadLetras()
 	}
-
+	
 	method esPoderoso() {
 		return self.poder() > 15
 	}
 	
 	method costo(){
 		return self.poder()
+	}	
+	
+	
+}
+
+class Logo inherits Hechizo{
+	
+	
+	constructor (unNombre, unMultiplo) = super (unNombre, unMultiplo)
+	
+	method cambiarNombre(nuevoNombre) { 
+		nombre = nuevoNombre
 	}
+
+
+	
 	
 }
 /*PRIMER HECHIZO*/
@@ -44,35 +54,25 @@ object espectroMalefico inherits Logo ("espectro Malefico",1) {
 
 
 /*SEGUNDO HECHIZO*/
-object hechizoBasico {
+object hechizoBasico inherits Hechizo("hechizo basico",0){
 	
-	var nombre = "hechizo basico"
 	
-	method poder() {
+	override method poder() {
 		return 10
 	}
-	method cambiarNombre(nombreNuevo){
-		nombre = "hechizo basico"
-	}
+
+
 	
-	method nombre() {
-		return nombre
-	}
-	
-	method esPoderoso() {
+	override method esPoderoso() {
 		return false
 	}
 	
-	method costo(){
-		return self.poder()
-	}
-
 
 }
 
 /*Nuevo hechizo parte 3 */
 
-object hechizoComercial inherits Logo("el hechizo comercial", 2){
+object hechizoComercial inherits Hechizo("el hechizo comercial", 2){
 	var porcentaje = 0.2
 	
 	method cambiarPorcentaje(nuevoPorcentaje) { 

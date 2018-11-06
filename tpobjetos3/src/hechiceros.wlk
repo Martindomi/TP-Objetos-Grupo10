@@ -34,12 +34,12 @@ class Hechicero {
 		cargaMaxima = carga
 	}
 	
-	method cuantoCarga(){
+	method verificarCarga(){
 		return artefactos.sum({artefacto => artefacto.pesoReal()})
 	}
 	
 	method puedeCargar(unArtefacto) {
-		if(unArtefacto.pesoReal()+ self.cuantoCarga() > cargaMaxima){
+		if(unArtefacto.pesoReal()+ self.verificarCarga() > cargaMaxima){
 			self.error("no puedes adquirir el artefacto porque supera la carga maxima del personaje")
 		}
 	}
@@ -75,8 +75,7 @@ class Hechicero {
 	
 	method comprarArtefacto(unArtefacto,unComerciante){
 		self.puedeCargar(unArtefacto)
-		unComerciante.vender(unArtefacto)
-		self.restarDinero(unComerciante.calcularPrecio(unArtefacto))
+		unComerciante.venderA(self,unArtefacto)
 		self.agregarArtefacto(unArtefacto)
 	}
 	method seCreePoderoso() {

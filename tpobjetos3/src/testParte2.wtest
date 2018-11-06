@@ -4,21 +4,21 @@ import hechizos.*
 import hechiceros.*
 
 describe "Test de regresion 2" {
-	
-	const armadura = new Armadura (0, 2, ninguno)
-	const espadaDelDestino = new ArmaBlanca (0)
-	const collarDivino = new CollarDivino(0,5)
+	const hoy = new Date()
+	const armadura = new Armadura (0,hoy, 2, ninguno)
+	const espadaDelDestino = new ArmaBlanca (0,hoy)
+	const collarDivino = new CollarDivino(0,hoy,5)
 	const cota3 = new CotaDeMalla(5)
-	const otraArmadura = new Armadura(0,2,cota3) 
+	const otraArmadura = new Armadura(0,hoy,2,cota3) 
 	const alacachula = new Logo("alacachula cachicomula",1) 
-	const unHechizo = new Hechizo(alacachula)
-	const armaduraConBendicion = new Armadura(0,2, bendicion) 
-	const armaduraConAlacachula = new Armadura(0, 2, unHechizo)
+	const unHechizo = new HechizoArmadura(alacachula)
+	const armaduraConBendicion = new Armadura(0,hoy,2, bendicion) 
+	const armaduraConAlacachula = new Armadura(0,hoy, 2, unHechizo)
 	const xenia = new Hechicero(alacachula, [], 100, 200)
 	const thor = new Hechicero(hechizoBasico, [], 100, 200)
 	const loki = new Hechicero(hechizoBasico, [], 5, 200)
 	const independiente = new Independiente (0)
-	const espejoFantastico = new EspejoFantastico (0)
+	const espejoFantastico = new EspejoFantastico (0,hoy)
 	const libroDeHechizosConAlacachula = new LibroDeHechizos ([alacachula, hechizoBasico])  
 	const mock = new Comerciante(independiente, [armadura, collarDivino, espadaDelDestino, otraArmadura, armaduraConBendicion, armaduraConAlacachula, espejoFantastico, libroDeHechizosConAlacachula], 0)
 	
@@ -57,11 +57,7 @@ describe "Test de regresion 2" {
 		divino (de 5 perlas), una armadura sin refuerzo y
 		otra armadura con malla de cota cuyo valor de
 		lucha es 5. Cuántas monedas le quedan a Xenia." {
-		
-		mock.tieneArtefacto(armadura)
-		mock.tieneArtefacto(collarDivino)
-		mock.tieneArtefacto(espadaDelDestino)
-		mock.tieneArtefacto(otraArmadura)			
+					
 		xenia.comprarArtefacto(espadaDelDestino, mock)
      	xenia.comprarArtefacto(collarDivino, mock)
      	xenia.comprarArtefacto(armadura, mock)
@@ -74,10 +70,6 @@ describe "Test de regresion 2" {
 		otra armadura con malla de cota cuyo valor de
 		lucha es 5. Cuántas monedas le quedan a Xenia." {
 		
-		mock.tieneArtefacto(espadaDelDestino)
-		mock.tieneArtefacto(collarDivino)
-		mock.tieneArtefacto(armadura)
-		mock.tieneArtefacto(otraArmadura)	
 		xenia.comprarArtefacto(espadaDelDestino, mock)
      	xenia.comprarArtefacto(collarDivino, mock)
      	xenia.comprarArtefacto(armadura, mock)
@@ -90,16 +82,14 @@ describe "Test de regresion 2" {
 	refuerzo, y una armadura reforzada con el hechizo
 	alacachula (del juego de datos). Cuántas monedas le
 	quedan a Thor"{
-		
-		mock.tieneArtefacto(armaduraConBendicion)
-		mock.tieneArtefacto(armaduraConAlacachula)
+
 		thor.comprarArtefacto(armaduraConBendicion, mock)
      	thor.comprarArtefacto(armaduraConAlacachula, mock)
      	assert.equals(74, thor.oro())
 	}
 			
 	test "Loki quiere comprar el espejo"{
-		mock.tieneArtefacto(espejoFantastico)
+
 		assert.throwsExceptionWithMessage("no tienes suficiente oro para comprar este hechizo",
      	{loki.comprarArtefacto(espejoFantastico, mock)}
      	)

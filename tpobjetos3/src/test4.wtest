@@ -5,9 +5,11 @@ import comerciantes.*
 
 describe "test parte 4"{
 	
+	const hoy = new Date()	
+	
 	const ursula = new Hechicero (hechizoBasico, [],100,200)
 	
-	const mascaraOscura = new MascaraOscura (1,1)
+	const mascaraOscura = new MascaraOscura (1,hoy,1)
 	const indep = new Independiente (0.09)
 	const pastoriza = new Comerciante(indep,[mascaraOscura],0)
 	const prieto = new Comerciante(registrado,[mascaraOscura],0)

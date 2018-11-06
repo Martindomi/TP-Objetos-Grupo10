@@ -5,18 +5,22 @@ import comerciantes.*
 
 describe "Test punto 2" {
 	
-	const hechizoPar = new Hechizo (hechizoComercial)
-	const armaduraHechizoPar = new Armadura (12,2,hechizoPar)
-	const hechizoImpar = new Hechizo(espectroMalefico)
-	const armaduraHechizoImpar = new Armadura(12,2,hechizoImpar)
-	const espadaVieja = new ArmaBlanca(7, 7, 5, 2006)
-	const espadaNueva = new ArmaBlanca(4)
-	const espadaComun = new ArmaBlanca(5, 50)
-	const mascaraOscura = new MascaraOscura (3, 1)
-	const mascaraClara = new MascaraOscura(2, 0)
+	const hoy = new Date()
+	const fechaVieja = new Date ( 7, 5, 2006)
+	const hace50Dias = (new Date()).minusDays(50)	
+	
+	const hechizoPar = new HechizoArmadura (hechizoComercial)
+	const armaduraHechizoPar = new Armadura (12,hoy,2,hechizoPar)
+	const hechizoImpar = new HechizoArmadura(espectroMalefico)
+	const armaduraHechizoImpar = new Armadura(12,hoy,2,hechizoImpar)
+	const espadaVieja = new ArmaBlanca(7,fechaVieja)
+	const espadaNueva = new ArmaBlanca(4,hoy)
+	const espadaComun = new ArmaBlanca(5, hace50Dias)
+	const mascaraOscura = new MascaraOscura (3,hoy, 1)
+	const mascaraClara = new MascaraOscura(2,hoy, 0)
 	const cotaDeMalla = new CotaDeMalla(0)
-	const armadura = new Armadura(10, 2, cotaDeMalla)
-	const otraArmadura = new Armadura(12, 2, ninguno)
+	const armadura = new Armadura(10,hoy, 2, cotaDeMalla)
+	const otraArmadura = new Armadura(12,hoy, 2, ninguno)
 	const independiente = new Independiente(0)
 	const mock = new Comerciante (independiente, [mascaraClara,mascaraOscura, armaduraHechizoPar],0)
 	const merlin = new Hechicero(null, [], 100, 10)
@@ -67,7 +71,7 @@ describe "Test punto 2" {
 	peso total que carga Merlin."{
 		merlin.comprarArtefacto(mascaraClara, mock)
 		merlin.comprarArtefacto(mascaraOscura, mock)
-		assert.equals(5, merlin.cuantoCarga())
+		assert.equals(5, merlin.verificarCarga())
 	}
 	
 	test "Merlín le quiere comprar a Mock Hnos. la armadura con hechizo par."{
@@ -81,7 +85,7 @@ describe "Test punto 2" {
 	cota de malla. Saber cuál es el peso total con el
 	que carga Ursula ahora."{
 		ursula.quitarArtefacto(armadura)
-		assert.equals(3,ursula.cuantoCarga())
+		assert.equals(3,ursula.verificarCarga())
 	}
 	
 	

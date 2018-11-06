@@ -4,15 +4,18 @@ import artefactos.*
 
 describe "Test de regresion 1" {
 	
+	const hoy = new Date()
+
+	
 	const libroDeHechizos = new LibroDeHechizos ([hechizoBasico])  
-	const collarDivino = new CollarDivino(null,5)
-	const mascaraOscura = new MascaraOscura(null, 1)
-	const espadaDelDestino = new ArmaBlanca(null)
+	const collarDivino = new CollarDivino(0,hoy,5)
+	const mascaraOscura = new MascaraOscura(0,hoy, 1)
+	const espadaDelDestino = new ArmaBlanca(0,hoy)
 	const rolando = new Hechicero (espectroMalefico,[espadaDelDestino , collarDivino , mascaraOscura], 100, null)
-	const espejoFantastico = new EspejoFantastico (null)
-	const armadura = new Armadura (null,2,ninguno) 
+	const espejoFantastico = new EspejoFantastico (0,hoy)
+	const armadura = new Armadura (0,hoy,2,ninguno) 
 	const cotaDeMalla = new CotaDeMalla(1)
-	const hechizo = new Hechizo(hechizoBasico)
+	const hechizo = new HechizoArmadura(hechizoBasico)
 	
 	test "Conocer el nivel de hechiceria de Rolando" {
 	

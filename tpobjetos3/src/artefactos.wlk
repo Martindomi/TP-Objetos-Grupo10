@@ -1,24 +1,21 @@
 import hechiceros.*
 import hechizos.*
 
+/*para fecha => var fecha1 = new Date (dia,mes,anio) */
 
-
-class Peso{
+class Artefacto{
 	
-	const fechaCompra
 	const peso
+	const fechaCompra
 	
-	constructor(unPeso){
+	
+	constructor(unPeso,unaFecha){
 		peso= unPeso
-		fechaCompra = new Date ()
+		fechaCompra = unaFecha
 	}
-	constructor (unPeso, haceXDias) {
-		peso = unPeso
-		fechaCompra = (new Date()).minusDays(haceXDias)
-	}
-	constructor(unPeso,dia,mes,anio){
-		fechaCompra = new Date (dia,mes,anio)
-		peso = unPeso
+	
+		method esEspejo(){
+		return false
 	}
 	
 	method diasDeCompra(){
@@ -39,20 +36,12 @@ class Peso{
 
 
 
-class ArmaBlanca inherits Peso{
+class ArmaBlanca inherits Artefacto{
 	
-	constructor(unPeso) = 
-		super(unPeso)
-		
-	constructor(unPeso,diasDesdeCompra) = 
-		super(unPeso,diasDesdeCompra)
-		
-	constructor(unPeso,diaCompra,mesCompra,anioCompra) = 
-		super(unPeso,diaCompra,mesCompra,anioCompra)
+	constructor(unPeso,fechaDeCompra) = 
+		super(unPeso,fechaDeCompra)
 	
-	method esEspejo(){
-		return false
-	}
+
 	method unidadesDeLucha() {
 		return 3
 	}
@@ -70,17 +59,13 @@ class ArmaBlanca inherits Peso{
 	
 
 
-class CollarDivino inherits Peso {
+class CollarDivino inherits Artefacto {
 	var perlas
 	
-	constructor(unPeso,unasPerlas) = 
-		super(unPeso){perlas=unasPerlas}
 		
-	constructor(unPeso,diasDesdeCompra,unasPerlas) = 
-		super(unPeso,diasDesdeCompra){perlas=unasPerlas}
+	constructor(unPeso,fechaDeCompra,unasPerlas) = 
+		super(unPeso,fechaDeCompra){perlas=unasPerlas}
 		
-	constructor(unPeso,diaCompra,mesCompra,anioCompra,unasPerlas) = 
-		super(unPeso,diaCompra,mesCompra,anioCompra){perlas=unasPerlas}
 	
 	method pesoExtra(){
 		return 0.5*perlas
@@ -90,9 +75,6 @@ class CollarDivino inherits Peso {
 		return self.pesoExtra() + super()
 	}
 
-	method esEspejo(){
-		return false
-	}
 	
 	method perlas(){
 		return perlas
@@ -113,18 +95,15 @@ class CollarDivino inherits Peso {
 
 
 
-class MascaraOscura inherits Peso{
+class MascaraOscura inherits Artefacto{
 	
 	var indiceOscuridad
 	var minimo = 4
-	constructor(unPeso,unValor) = 
-		super(unPeso){self.ponerValor(unValor)}
+
 		
-	constructor(unPeso,diasDesdeCompra,unValor) = 
-		super(unPeso,diasDesdeCompra){self.ponerValor(unValor)}
+	constructor(unPeso,fechaDeCompra,unValor) = 
+		super(unPeso,fechaDeCompra){self.ponerValor(unValor)}
 		
-	constructor(unPeso,diaCompra,mesCompra,anioCompra,unValor) = 
-		super(unPeso,diaCompra,mesCompra,anioCompra) {self.ponerValor(unValor)}
 	
 	method ponerValor(unValor){
 		if(unValor < 0 or unValor > 1){
@@ -139,10 +118,6 @@ class MascaraOscura inherits Peso{
 	
 	override method pesoReal(){
 		return self.pesoExtra() + super()
-	}
-	
-	method esEspejo(){
-		return false
 	}
 	
 	method unidadesDeLucha() {
@@ -164,28 +139,17 @@ class MascaraOscura inherits Peso{
 
 
 /*PUNTO 3 */
-class Armadura inherits Peso {
+class Armadura inherits Artefacto {
 	
 	var valorBase
 	var refuerzo 
 	
-	constructor(unPeso,unValor,unRefuerzo) = 
-		super(unPeso) {
+	constructor(unPeso,fechaDeCompra,unValor,unRefuerzo) = 
+		super(unPeso,fechaDeCompra) {
 		valorBase = unValor
 		refuerzo = unRefuerzo
 	}
 		
-	constructor(unPeso,diasDesdeCompra,unValor,unRefuerzo) = 
-		super(unPeso,diasDesdeCompra) {
-		valorBase = unValor
-		refuerzo = unRefuerzo
-	}
-		
-	constructor(unPeso,diaCompra,mesCompra,anioCompra,unValor,unRefuerzo) = 
-		super(unPeso,diaCompra,mesCompra,anioCompra) {
-		valorBase = unValor
-		refuerzo = unRefuerzo
-	}
 	
 	method pesoExtra(){
 		return refuerzo.pesoExtra()
@@ -193,9 +157,6 @@ class Armadura inherits Peso {
 	
 	override method pesoReal(){
 		return self.pesoExtra() + super()
-	}
-	method esEspejo(){
-		return false
 	}
 	method poderDeLucha(hechicero) {
 			return valorBase + refuerzo.valorRefuerzo(hechicero)
@@ -249,7 +210,7 @@ object bendicion {
 		
 }
 
-class Hechizo {
+class HechizoArmadura {
 	
 		var elHechizo 
 		
@@ -293,18 +254,14 @@ object ninguno {
 
 
 
-class EspejoFantastico inherits Peso{
+class EspejoFantastico inherits Artefacto{
 	
-	constructor(unPeso) = 
-		super(unPeso)
+
+	constructor(unPeso,fechaDeCompra) = 
+		super(unPeso,fechaDeCompra)
 		
-	constructor(unPeso,diasDesdeCompra) = 
-		super(unPeso,diasDesdeCompra)
 		
-	constructor(unPeso,diaCompra,mesCompra,anioCompra) = 
-		super(unPeso,diaCompra,mesCompra,anioCompra) 
-		
-	method esEspejo(){
+	override method esEspejo(){
 		return true
 	}
 	

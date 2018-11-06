@@ -69,7 +69,7 @@ class Comerciante {
 		artefactos = unosArtefactos
 		oro = cantOro
 	}
-	method tieneArtefacto(artefacto) {
+	method verificarSiTieneArtefacto(artefacto) {
 		if (not(artefactos.contains(artefacto))){
 			self.error("comerciante no posee artefacto")
 		}	
@@ -83,10 +83,15 @@ class Comerciante {
 		return artefacto.costo() + tipoComerciante.precioExtra(artefacto)
 	}
 	
-	method vender(artefacto){
-		self.tieneArtefacto(artefacto)
-		self.quitarArtefacto(artefacto)
+	method cobrarA(personaje,artefacto) {
+		personaje.restarDinero(self.calcularPrecio(artefacto))
 		oro += self.calcularPrecio(artefacto)
+	}
+	
+	method venderA(personaje,artefacto){
+		self.verificarSiTieneArtefacto(artefacto)
+		self.cobrarA(personaje,artefacto)
+		self.quitarArtefacto(artefacto)
 	}
 	
 	method cambiarSituacionImpositiva(nuevoTipo) {

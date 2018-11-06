@@ -4,8 +4,10 @@ import artefactos.*
 
 describe "test PUNTO 3"{
 	
+	const hoy = new Date()
+
 	const navi = new Npc (hechizoBasico, [],100,200,facil)
-	const mascaraClara = new MascaraOscura (0,0)
+	const mascaraClara = new MascaraOscura (0,hoy, 0)
 	const ashleyGraham = new Npc (hechizoBasico, [mascaraClara],100,200,moderado)
 	
  
